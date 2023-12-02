@@ -1,8 +1,11 @@
-// import PropTypes from "prop-types";
+import styles from "./styles.module.css";
+
+
+const {userInfo} = styles
 
 const UserInfo = ({ name, age, location, phone }) => {
   return (
-    <div>
+    <div className={userInfo}>
       <ul>
         <li>name: {name}</li>
         <li>age: {age}</li>
@@ -12,12 +15,5 @@ const UserInfo = ({ name, age, location, phone }) => {
     </div>
   );
 };
-
-// UserInfo.propTypes = {
-//   name: PropTypes.string,
-//   age: PropTypes.string,
-//   location: PropTypes.string,
-//   phone: PropTypes.string,
-// };
 
 export default UserInfo;
