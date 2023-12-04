@@ -1,7 +1,6 @@
 import styles from "./styles.module.css";
 
-
-const {userInfo} = styles
+const { userInfo } = styles;
 
 const UserInfo = ({ name, age, location, phone }) => {
   return (

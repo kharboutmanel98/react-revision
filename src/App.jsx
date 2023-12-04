@@ -37,7 +37,7 @@ const App = () => {
   return (
     <div>
       <Container>
-        <UserForm></UserForm>
+        <UserForm />
       </Container>
       <Container>{userList}</Container>
     </div>
