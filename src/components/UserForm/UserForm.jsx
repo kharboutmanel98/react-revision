@@ -1,7 +1,10 @@
-import { useState, useRef, useEffect } from "react";
+// UserForm.js
+import { useState } from "react";
 import styles from "./styles.module.css";
-const { classForm } = styles;
+import InputForm from "./InputForm";
 import { v4 as uuidv4 } from "uuid";
+
+const { classForm } = styles;
 
 const intState = {
   id: uuidv4(),
@@ -11,67 +14,45 @@ const intState = {
   phone: "",
 };
 
+
+
 const UserForm = ({ addUser }) => {
   const [form, setForm] = useState(intState);
-  const focusInput = useRef("test");
 
-  const handleChangeInput = (event) => {
-    const { name, value } = event.target;
-
+  const handleChangeInput = (name, value) => {
     setForm((prev) => ({
       ...prev,
       [name]: value,
     }));
   };
 
-  useEffect(() => {
-    focusInput.current.focus();
-  }, []);
-
   const formHandler = (e) => {
     e.preventDefault();
     addUser(form);
     setForm(intState);
-    // console.log(testInput.current.value)
+    
   };
+  
+  const inputFields = [
+    { label: "Name", name: "name" },
+    { label: "Age", name: "age" },
+    { label: "Location", name: "location" },
+    { label: "Phone", name: "phone" },
+  ];
 
   return (
     <div className={classForm}>
       <form onSubmit={formHandler}>
-        <label htmlFor="name">Name</label>
-        <input
-          type="text"
-          name="name"
-          value={form.name}
-          onChange={(e) => handleChangeInput(e)}
-          ref={focusInput}
-        />
-
-        <label htmlFor="age">Age</label>
-        <input
-          type="text"
-          name="age"
-          value={form.age}
-          onChange={(e) => handleChangeInput(e)}
-        />
-
-        <label htmlFor="location">Location</label>
-        <input
-          type="text"
-          name="location"
-          value={form.location}
-          onChange={(e) => handleChangeInput(e)}
-        />
-
-        <label htmlFor="phone">Phone</label>
-        <input
-          type="text"
-          name="phone"
-          value={form.phone}
-          onChange={(e) => handleChangeInput(e)}
-        />
-
-        <input type="submit" value="submit" />
+        {inputFields.map((field) => (
+          <InputForm
+            key={field.name}
+            label={field.label}
+            name={field.name}
+            value={field.value}
+            onChange={handleChangeInput}
+          />
+        ))}
+        <input type="submit" value="Submit" />
       </form>
     </div>
   );
